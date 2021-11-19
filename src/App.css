@@ -1,11 +1,11 @@
 .login-container {
-  align-items:center;
+  align-items: center;
   border: 10px solid rgb(21, 80, 24);
   border-radius: 25px;
   display: flex;
   flex-direction: column;
   height: 300px;
-  justify-content:center;
+  justify-content: center;
   margin: 20px 40%;
   padding: 10px;
   width: 200px;
