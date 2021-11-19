@@ -1,73 +1,68 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { fetchCurrency } from '../actions';
+import Header from '../components/Header';
+import Currency from '../components/Currency';
+import Payment from '../components/Payment';
 
 class Wallet extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      totalField: 0,
       expenditure: ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'],
-      currency: [],
     };
-    this.fetchCurrency = this.fetchCurrency.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    this.fetchCurrency();
+  async componentDidMount() {
+    const { fetchCurr } = this.props;
+    await fetchCurr();
   }
 
-  fetchCurrency() {
-    const CURR_API = 'https://economia.awesomeapi.com.br/json/all';
-    fetch(CURR_API)
-      .then((response) => response.json())
-      .then((data) => this.setState({ currency: [...Object.values(data)] }));
+  handleChange({ target }) {
+    const { name, value } = target;
+    this.setState({ [name]: value });
   }
 
   render() {
-    const { email } = this.props;
-    const { totalField, expenditure, currency } = this.state;
-    console.log(currency);
+    const { expenditure } = this.state;
     return (
       <>
-        <header className="header-container">
-          <div className="field-container">
-            <p>Despesa Total:</p>
-            <div data-testid="total-field">{ `R$ ${totalField},00` }</div>
-            <div data-testid="header-currency-field">BRL</div>
-          </div>
-          <div data-testid="email-field" className="user">{ email }</div>
-        </header>
+        <Header />
         <form action="">
           <label htmlFor="value">
             Valor
-            <input type="text" name="" id="value" />
+            <input
+              type="text"
+              name="value"
+              data-testid="value-input"
+              onChange={ this.handleChange }
+            />
           </label>
           <label htmlFor="description">
             Descrição:
-            <input type="text" name="" id="description" />
+            <input
+              type="text"
+              name="description"
+              data-testid="description-input"
+              onChange={ this.handleChange }
+            />
           </label>
-          <label htmlFor="currency">
-            Moeda:
-            <select name="" id="currency">
-              { currency.filter((element) => element.codein !== 'BRLT')
-                .map((curr) => <option key={ curr.code }>{curr.code}</option>)}
-            </select>
-          </label>
-          <label htmlFor="currency">
-            Método de pagamento
-            <select name="" id="currency">
-              <option value="">Dinheiro</option>
-              <option value="">Cartão de crédito</option>
-              <option value="">Cartão de débito</option>
-            </select>
-          </label>
+          <Currency changeInput={ this.handleChange } />
+          <Payment changeInput={ this.handleChange } />
           <label htmlFor="tag">
             Tag
-            <select name="" id="tag">
+            <select
+              name="tag"
+              id="tag"
+              data-testid="tag-input"
+              onChange={ this.handleChange }
+            >
               { expenditure.map((el) => <option key={ el }>{el}</option>)}
             </select>
           </label>
+          <button type="submit">Adicionar despesa</button>
         </form>
       </>
     );
@@ -75,11 +70,14 @@ class Wallet extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  email: state.user.email,
+  email: state,
+});
+const mapDispatchToProps = (dispatch) => ({
+  fetchCurr: () => dispatch(fetchCurrency()),
 });
 
 Wallet.propTypes = {
-  email: PropTypes.string.isRequired,
+  fetchCurr: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Wallet);
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
