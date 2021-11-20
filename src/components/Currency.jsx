@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 class Currency extends Component {
   render() {
-    const { currency, changeInput } = this.props;
+    const { allCoins, changeInput } = this.props;
     return (
       <label htmlFor="currency">
         Moeda:
@@ -14,12 +14,11 @@ class Currency extends Component {
           data-testid="currency-input"
           onChange={ changeInput }
         >
-          { currency.filter((element) => element.codein !== 'BRLT')
-            .map((curr) => (
-              <option key={ curr.code } data-testid={ curr.code }>
-                {curr.code}
-              </option>
-            ))}
+          { allCoins.map((curr) => (
+            <option key={ curr.code } data-testid={ curr.code }>
+              {curr.code}
+            </option>
+          ))}
         </select>
       </label>
     );
@@ -28,11 +27,11 @@ class Currency extends Component {
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  currency: state.wallet.currencies,
+  allCoins: state.wallet.currencies,
 });
 
 Currency.propTypes = {
-  currency: PropTypes.arrayOf(PropTypes.object).isRequired,
+  allCoins: PropTypes.arrayOf(PropTypes.object).isRequired,
   changeInput: PropTypes.func.isRequired,
 };
 
