@@ -32,3 +32,27 @@
   justify-content: center;
 }
 
+.container-table {
+  border: 2px solid black;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.column-table {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.currency-column {
+  display: flex;
+  justify-content: space-between;
+}
+
+.currency-column h3 {
+  margin: 0 30px;
+}
+

@@ -6,16 +6,17 @@ import Header from '../components/Header';
 import Currency from '../components/Currency';
 import Payment from '../components/Payment';
 import Tag from '../components/Tag';
+import Table from '../components/Table';
 
 class Wallet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      countSubmit: 0,
+      id: 0,
       value: '',
       currency: '',
       description: '',
-      payment: '',
+      method: '',
       tag: '',
     };
 
@@ -35,20 +36,21 @@ class Wallet extends React.Component {
 
   async submitExpensis() {
     const { fetchCurr, addValor, allCoins, addExpense } = this.props;
-    const { value, currency, countSubmit, description, payment, tag } = this.state;
+    const { value, currency, id, description, method, tag } = this.state;
     await fetchCurr();
     const currentCurrency = allCoins.filter((curr) => currency === curr.code)[0].ask;
     console.log(currentCurrency);
     addValor(Number(value) * currentCurrency);
     addExpense({
-      countSubmit,
+      id,
       value,
-      currency,
       description,
-      payment,
+      currency,
+      method,
       tag,
       exchangeRates: { ...allCoins },
     });
+    this.setState({ id: id + 1 });
   }
 
   render() {
@@ -81,6 +83,7 @@ class Wallet extends React.Component {
           <Tag changeInput={ this.handleChange } />
           <button type="button" onClick={ this.submitExpensis }>Adicionar despesa</button>
         </form>
+        <Table />
       </>
     );
   }

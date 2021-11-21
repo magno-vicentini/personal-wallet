@@ -5,10 +5,10 @@ class Payment extends Component {
   render() {
     const { changeInput } = this.props;
     return (
-      <label htmlFor="payment" data-testid="method-input">
+      <label htmlFor="method" data-testid="method-input">
         Método de pagamento
         <select
-          name="payment"
+          name="method"
           id="payment"
           onChange={ changeInput }
         >
