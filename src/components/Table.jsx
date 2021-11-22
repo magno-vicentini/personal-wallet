@@ -29,24 +29,23 @@ class Table extends Component {
             { allExpenses.map((tag) => <th key={ tag.id }>{tag.tag}</th>)}
           </tr>
           <tr className="column-tbody">
-            <td>3</td>
             { allExpenses.map((method) => <th key={ method.id }>{method.method}</th>)}
           </tr>
           <tr className="column-tbody">
-            <td>4</td>
             { allExpenses.map((value) => <th key={ value.id }>{value.value}</th>)}
           </tr>
           <tr className="column-tbody">
-            <td>5</td>
             { allExpenses.map((value) => <th key={ value.id }>{value.value}</th>)}
           </tr>
           <tr className="column-tbody">
-            <td>6</td>
             { allExpenses.map((value) => <th key={ value.id }>{value.value}</th>)}
           </tr>
           <tr className="column-tbody">
-            <td>7</td>
             { allExpenses.map((curr) => <th key={ curr.id }>Real</th>)}
+          </tr>
+          <tr className="column-tbody">
+            { allExpenses
+              .map((curr) => <button key={ curr.id } type="button">Delete</button>)}
           </tr>
         </tbody>
       </table>

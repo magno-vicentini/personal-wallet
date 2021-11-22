@@ -67,9 +67,8 @@
 }
 
 .column-tbody {
-  border: 2px solid black;
-  border-radius: 10px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 10%;
 }
@@ -79,5 +78,3 @@
   justify-content: space-around;
   padding: 10px;
 }
-
-
