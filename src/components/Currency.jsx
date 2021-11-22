@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 class Currency extends Component {
   render() {
     const { allCoins, changeInput } = this.props;
+    console.log(Object.keys(allCoins));
     return (
       <label htmlFor="currency">
         Moeda:
@@ -14,9 +15,9 @@ class Currency extends Component {
           data-testid="currency-input"
           onChange={ changeInput }
         >
-          { allCoins.map((curr) => (
-            <option key={ curr.code } data-testid={ curr.code }>
-              {curr.code}
+          { Object.keys(allCoins).map((curr) => (
+            <option key={ curr } data-testid={ curr }>
+              {curr}
             </option>
           ))}
         </select>
@@ -31,7 +32,7 @@ const mapStateToProps = (state) => ({
 });
 
 Currency.propTypes = {
-  allCoins: PropTypes.arrayOf(PropTypes.object).isRequired,
+  allCoins: PropTypes.objectOf(PropTypes.object).isRequired,
   changeInput: PropTypes.func.isRequired,
 };
 

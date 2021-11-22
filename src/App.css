@@ -32,13 +32,13 @@
   justify-content: center;
 }
 
-.container-table {
+.container-thead {
   border: 2px solid black;
   border-radius: 15px;
   display: flex;
-  justify-content: space-evenly;
-  margin: 20px 0;
-  padding: 10px;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding: 10px 0;
 }
 
 .column-table {
@@ -55,4 +55,29 @@
 .currency-column h3 {
   margin: 0 30px;
 }
+
+.currency-column tr {
+  margin: 0 30px;
+}
+
+.column-thead {
+  display: flex;
+  justify-content: center;
+  width: 10%;
+}
+
+.column-tbody {
+  border: 2px solid black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  width: 10%;
+}
+
+.form-expenses {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
 

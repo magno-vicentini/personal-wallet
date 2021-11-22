@@ -27,6 +27,7 @@ class Wallet extends React.Component {
   async componentDidMount() {
     const { fetchCurr } = this.props;
     await fetchCurr();
+    console.log(fetchCurr);
   }
 
   handleChange({ target }) {
@@ -38,17 +39,19 @@ class Wallet extends React.Component {
     const { fetchCurr, addValor, allCoins, addExpense } = this.props;
     const { value, currency, id, description, method, tag } = this.state;
     await fetchCurr();
-    const currentCurrency = allCoins.filter((curr) => currency === curr.code)[0].ask;
+    const currentCurrency = Object.values(allCoins)
+      .filter((element) => element.code === currency)[0].ask;
+
     console.log(currentCurrency);
     addValor(Number(value) * currentCurrency);
     addExpense({
       id,
       value,
-      description,
       currency,
       method,
       tag,
-      exchangeRates: { ...allCoins },
+      description,
+      exchangeRates: allCoins,
     });
     this.setState({ id: id + 1 });
   }
@@ -59,7 +62,7 @@ class Wallet extends React.Component {
     return (
       <>
         <Header />
-        <form action="">
+        <form action="" className="form-expenses">
           <label htmlFor="value">
             Valor
             <input
@@ -103,7 +106,7 @@ Wallet.propTypes = {
   fetchCurr: PropTypes.func.isRequired,
   addValor: PropTypes.func.isRequired,
   addExpense: PropTypes.func.isRequired,
-  allCoins: PropTypes.arrayOf(PropTypes.object).isRequired,
+  allCoins: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

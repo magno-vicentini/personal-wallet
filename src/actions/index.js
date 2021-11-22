@@ -4,7 +4,10 @@ export const REQUEST_API = 'REQUEST_API';
 export const ADD_VALOR = 'ADD_VALOR';
 export const ADD_EXPENSIS = 'ADD_EXPENSIS';
 
-export const getCurrency = (data) => ({ type: REQUEST_API, data });
+export const getCurrency = (data) => ({
+  type: REQUEST_API,
+  data,
+});
 
 export const loginUser = (email) => ({
   type: LOGIN_USER,

@@ -2,7 +2,7 @@ import { REQUEST_API, ADD_VALOR, ADD_EXPENSIS } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
-  expensis: [],
+  expenses: [],
   totalField: 0,
 };
 
@@ -12,7 +12,8 @@ function wallet(state = INITIAL_STATE, action) {
     return {
       ...state,
       currencies: [...Object.values(action.data)]
-        .filter((element) => element.codein !== 'BRLT'),
+        .filter((element) => element.codein !== 'BRLT')
+        .reduce((acc, curr) => ({ ...acc, [curr.code]: curr }), []),
     };
   case ADD_VALOR:
     return {
@@ -22,7 +23,7 @@ function wallet(state = INITIAL_STATE, action) {
   case ADD_EXPENSIS:
     return {
       ...state,
-      expensis: [...state.expensis, action.obj],
+      expenses: [...state.expenses, action.obj],
     };
   default:
     return state;

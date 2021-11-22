@@ -4,51 +4,62 @@ import { connect } from 'react-redux';
 
 class Table extends Component {
   render() {
-    const { allExpensis } = this.props;
+    const { allExpenses } = this.props;
+    console.log(allExpenses);
     return (
-      <div className="container-table">
-        <div className="column-table">
-          <h3>Descrição</h3>
-          { allExpensis.map((desc) => <p key={ desc.id }>{desc.description}</p>)}
-        </div>
-        <div className="column-table">
-          <h3>Tag</h3>
-          { allExpensis.map((tag) => <p key={ tag.id }>{tag.tag}</p>)}
-        </div>
-        <div className="column-table">
-          <h3>Método de pagamento</h3>
-          { allExpensis.map((method) => <p key={ method.id }>{method.method}</p>)}
-        </div>
-        <div className="column-table">
-          <h3>Valor</h3>
-          { allExpensis.map((value) => <p key={ value.id }>{value.value}</p>)}
-        </div>
-        <div className="column-table">
-          <div className="currency-column">
-            <h3>Moeda</h3>
-            <h3>Câmbio utilizado</h3>
-            {/* { allExpensis.map((curr) => <p key={ curr.id }>{value.value}</p>)} */}
-          </div>
-        </div>
-        <div className="column-table">
-          <h3>Valor convertido</h3>
-          { allExpensis.map((valor) => <p key={ valor.id }>{valor.valor}</p>)}
-        </div>
-        <div className="column-table">
-          <h3>Moeda de conversão</h3>
-          { allExpensis.map((curr) => <p key={ curr.id }>Real</p>)}
-        </div>
-      </div>
+      <table className="column-table">
+        <thead className="container-thead">
+          <tr className="column-thead"><th>Descrição</th></tr>
+          <tr className="column-thead"><th>Tag</th></tr>
+          <tr className="column-thead"><th>Método de pagamento</th></tr>
+          <tr className="column-thead"><th>Valor</th></tr>
+          <tr className="column-thead">
+            <th className="currency-column">Moeda</th>
+            <th>Câmbio utilizado</th>
+          </tr>
+          <tr className="column-thead"><th>Valor convertido</th></tr>
+          <tr className="column-thead"><th>Moeda de conversão</th></tr>
+          <tr className="column-thead"><th>Editar/Excluir</th></tr>
+        </thead>
+        <tbody className="container-thead">
+          <tr className="column-tbody">
+            { allExpenses.map((desc) => <th key={ desc.id }>{desc.description}</th>)}
+          </tr>
+          <tr className="column-tbody">
+            { allExpenses.map((tag) => <th key={ tag.id }>{tag.tag}</th>)}
+          </tr>
+          <tr className="column-tbody">
+            <td>3</td>
+            { allExpenses.map((method) => <th key={ method.id }>{method.method}</th>)}
+          </tr>
+          <tr className="column-tbody">
+            <td>4</td>
+            { allExpenses.map((value) => <th key={ value.id }>{value.value}</th>)}
+          </tr>
+          <tr className="column-tbody">
+            <td>5</td>
+            { allExpenses.map((value) => <th key={ value.id }>{value.value}</th>)}
+          </tr>
+          <tr className="column-tbody">
+            <td>6</td>
+            { allExpenses.map((value) => <th key={ value.id }>{value.value}</th>)}
+          </tr>
+          <tr className="column-tbody">
+            <td>7</td>
+            { allExpenses.map((curr) => <th key={ curr.id }>Real</th>)}
+          </tr>
+        </tbody>
+      </table>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  allExpensis: state.wallet.expensis,
+  allExpenses: state.wallet.expenses,
 });
 
 Table.propTypes = {
-  allExpensis: PropTypes.arrayOf(PropTypes.object).isRequired,
+  allExpenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps)(Table);
