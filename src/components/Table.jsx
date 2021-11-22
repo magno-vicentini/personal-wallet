@@ -10,43 +10,39 @@ class Table extends Component {
     return (
       <table className="column-table">
         <TableThead />
-        { allExpenses.map((expense) => {
-          const currUsed = Object.values(expense.exchangeRates)
-            .filter((currencyUsed) => currencyUsed.codein !== 'BRLT'
-              && currencyUsed.code === expense.currency)[0];
+        <tbody>
+          { allExpenses.map((expense) => {
+            const currUsed = Object.values(expense.exchangeRates)
+              .filter((currencyUsed) => currencyUsed.codein !== 'BRLT'
+                && currencyUsed.code === expense.currency)[0];
 
-          return (
-            <tbody key={ expense.id } className="row-expense">
-              <tr className="cell-tbody"><td>{expense.description}</td></tr>
-              <tr className="cell-tbody"><td>{expense.tag}</td></tr>
-              <tr className="cell-tbody"><td>{expense.method}</td></tr>
-              <tr className="cell-tbody"><td>{expense.value}</td></tr>
-              <tr className="cell-tbody">
-                <td className="currency-type">
+            return (
+              <tr key={ expense.id } className="row-expense">
+                <th className="cell-tbody">{expense.description}</th>
+                <th className="cell-tbody">{expense.tag}</th>
+                <th className="cell-tbody">{expense.method}</th>
+                <th className="cell-tbody">{expense.value}</th>
+                <th className="cell-tbody">
                   {currUsed.name.split('/')[0]}
-                </td>
-                <td className="currency-exchange">
+                </th>
+                <th className="cell-tbody">
                   {Number(currUsed.ask).toFixed(2)}
-                </td>
-              </tr>
-              <tr className="cell-tbody">
-                <td>
+                </th>
+                <th className="cell-tbody">
                   {(expense.value * Number(currUsed.ask)).toFixed(2)}
-                </td>
-              </tr>
-              <tr className="cell-tbody"><td>Real</td></tr>
-              <tr className="cell-tbody">
-                <td>
+                </th>
+                <th className="cell-tbody">Real</th>
+                <th className="cell-tbody">
                   <button
                     type="button"
                     data-testid="delete-btn"
                   >
                     Excluir
                   </button>
-                </td>
-              </tr>
-            </tbody>);
-        })}
+                </th>
+              </tr>);
+          })}
+        </tbody>
 
       </table>
     );

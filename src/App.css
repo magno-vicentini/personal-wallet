@@ -12,6 +12,7 @@
 }
 
 .header-container {
+  align-items: center;
   background-color: rgba(34, 33, 33, 0.13);
   border: 2px solid black;
   border-radius: 10px;
