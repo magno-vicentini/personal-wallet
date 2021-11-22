@@ -15,11 +15,13 @@ class Currency extends Component {
           data-testid="currency-input"
           onChange={ changeInput }
         >
-          { Object.keys(allCoins).map((curr) => (
-            <option key={ curr } data-testid={ curr }>
-              {curr}
-            </option>
-          ))}
+          { Object.keys(allCoins)
+            .filter((el) => el !== 'USDT')
+            .map((curr) => (
+              <option key={ curr } data-testid={ curr }>
+                {curr}
+              </option>
+            ))}
         </select>
       </label>
     );
@@ -32,7 +34,10 @@ const mapStateToProps = (state) => ({
 });
 
 Currency.propTypes = {
-  allCoins: PropTypes.objectOf(PropTypes.object).isRequired,
+  allCoins: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object]).isRequired,
   changeInput: PropTypes.func.isRequired,
 };
 

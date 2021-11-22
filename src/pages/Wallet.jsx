@@ -37,7 +37,7 @@ class Wallet extends React.Component {
 
   async submitExpensis() {
     const { fetchCurr, addValor, allCoins, addExpense } = this.props;
-    const { value, currency, id, description, method, tag } = this.state;
+    const { value, currency, id } = this.state;
     await fetchCurr();
     const currentCurrency = Object.values(allCoins)
       .filter((element) => element.code === currency)[0].ask;
@@ -45,20 +45,21 @@ class Wallet extends React.Component {
     console.log(currentCurrency);
     addValor(Number(value) * currentCurrency);
     addExpense({
-      id,
-      value,
-      currency,
-      method,
-      tag,
-      description,
+      ...this.state,
       exchangeRates: allCoins,
     });
-    this.setState({ id: id + 1 });
+
+    return this.setState({
+      id: id + 1,
+      value: '',
+      description: '',
+    });
   }
 
   render() {
+    const { value, description } = this.state;
     const { allCoins } = this.props;
-    console.log(allCoins);
+    console.log('alou', allCoins);
     return (
       <>
         <Header />
@@ -68,6 +69,7 @@ class Wallet extends React.Component {
             <input
               type="text"
               name="value"
+              value={ value }
               data-testid="value-input"
               onChange={ this.handleChange }
             />
@@ -77,6 +79,7 @@ class Wallet extends React.Component {
             <input
               type="text"
               name="description"
+              value={ description }
               data-testid="description-input"
               onChange={ this.handleChange }
             />
@@ -106,7 +109,10 @@ Wallet.propTypes = {
   fetchCurr: PropTypes.func.isRequired,
   addValor: PropTypes.func.isRequired,
   addExpense: PropTypes.func.isRequired,
-  allCoins: PropTypes.objectOf(PropTypes.object).isRequired,
+  allCoins: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object]).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

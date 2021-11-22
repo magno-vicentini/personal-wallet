@@ -11,9 +11,8 @@ function wallet(state = INITIAL_STATE, action) {
   case REQUEST_API:
     return {
       ...state,
-      currencies: [...Object.values(action.data)]
-        .filter((element) => element.codein !== 'BRLT')
-        .reduce((acc, curr) => ({ ...acc, [curr.code]: curr }), []),
+      currencies: [...Object.entries(action.data)]
+        .reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), []),
     };
   case ADD_VALOR:
     return {
