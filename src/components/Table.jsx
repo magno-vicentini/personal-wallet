@@ -18,28 +18,28 @@ class Table extends Component {
 
             return (
               <tr key={ expense.id } className="row-expense">
-                <th className="cell-tbody">{expense.description}</th>
-                <th className="cell-tbody">{expense.tag}</th>
-                <th className="cell-tbody">{expense.method}</th>
-                <th className="cell-tbody">{expense.value}</th>
-                <th className="cell-tbody">
+                <td className="cell-tbody">{expense.description}</td>
+                <td className="cell-tbody">{expense.tag}</td>
+                <td className="cell-tbody">{expense.method}</td>
+                <td className="cell-tbody">{expense.value}</td>
+                <td className="cell-tbody">
                   {currUsed.name.split('/')[0]}
-                </th>
-                <th className="cell-tbody">
+                </td>
+                <td className="cell-tbody">
                   {Number(currUsed.ask).toFixed(2)}
-                </th>
-                <th className="cell-tbody">
+                </td>
+                <td className="cell-tbody">
                   {(expense.value * Number(currUsed.ask)).toFixed(2)}
-                </th>
-                <th className="cell-tbody">Real</th>
-                <th className="cell-tbody">
+                </td>
+                <td className="cell-tbody">Real</td>
+                <td className="cell-tbody">
                   <button
                     type="button"
                     data-testid="delete-btn"
                   >
                     Excluir
                   </button>
-                </th>
+                </td>
               </tr>);
           })}
         </tbody>
