@@ -1,4 +1,10 @@
-import { REQUEST_API, ADD_VALOR, ADD_EXPENSIS } from '../actions';
+import {
+  REQUEST_API,
+  ADD_VALOR,
+  ADD_EXPENSES,
+  DELETE_EXPENSE,
+  SUB_VALOR,
+} from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -19,10 +25,20 @@ function wallet(state = INITIAL_STATE, action) {
       ...state,
       totalField: state.totalField + action.valor,
     };
-  case ADD_EXPENSIS:
+  case SUB_VALOR:
+    return {
+      ...state,
+      totalField: state.totalField - action.valor,
+    };
+  case ADD_EXPENSES:
     return {
       ...state,
       expenses: [...state.expenses, action.obj],
+    };
+  case DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: [...state.expenses].filter((element) => element !== action.obj),
     };
   default:
     return state;

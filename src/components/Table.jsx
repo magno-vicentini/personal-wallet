@@ -2,8 +2,24 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TableThead from './TableThead';
+import { deleteExpense, subAllValor } from '../actions';
 
 class Table extends Component {
+  constructor() {
+    super();
+    this.deleteCurrentExpense = this.deleteCurrentExpense.bind(this);
+  }
+
+  deleteCurrentExpense(expense) {
+    const { deleteItem, allCoins, subValor } = this.props;
+    deleteItem(expense);
+    console.log(expense);
+    const currentCurrency = Object.values(allCoins)
+      .filter((element) => element.code === expense.currency)[0].ask;
+    // console.log(currentCurrency);
+    subValor(Number(expense.value) * currentCurrency);
+  }
+
   render() {
     const { allExpenses } = this.props;
     console.log(allExpenses);
@@ -36,6 +52,7 @@ class Table extends Component {
                   <button
                     type="button"
                     data-testid="delete-btn"
+                    onClick={ () => this.deleteCurrentExpense(expense) }
                   >
                     Excluir
                   </button>
@@ -51,10 +68,22 @@ class Table extends Component {
 
 const mapStateToProps = (state) => ({
   allExpenses: state.wallet.expenses,
+  allCoins: state.wallet.currencies,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  deleteItem: (obj) => dispatch(deleteExpense(obj)),
+  subValor: (valor) => dispatch(subAllValor(valor)),
 });
 
 Table.propTypes = {
   allExpenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteItem: PropTypes.func.isRequired,
+  subValor: PropTypes.func.isRequired,
+  allCoins: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object]).isRequired,
 };
 
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

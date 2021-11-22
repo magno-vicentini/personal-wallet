@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 class Header extends Component {
   render() {
     const { email, totalField = 0 } = this.props;
+    console.log(totalField);
     return (
       <header className="header-container">
         <div className="field-container">
           <p>Despesa Total:</p>
-          <div data-testid="total-field">{ `R$ ${totalField.toFixed(2)} ` }</div>
+          <div data-testid="total-field">{ totalField }</div>
           <div data-testid="header-currency-field">BRL</div>
         </div>
         <div data-testid="email-field" className="user">{ email }</div>

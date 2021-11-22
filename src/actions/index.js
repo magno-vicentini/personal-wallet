@@ -2,7 +2,9 @@
 export const LOGIN_USER = 'LOGIN_USER';
 export const REQUEST_API = 'REQUEST_API';
 export const ADD_VALOR = 'ADD_VALOR';
-export const ADD_EXPENSIS = 'ADD_EXPENSIS';
+export const ADD_EXPENSES = 'ADD_EXPENSIS';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const SUB_VALOR = 'SUB_VALOR';
 
 export const getCurrency = (data) => ({
   type: REQUEST_API,
@@ -19,8 +21,18 @@ export const sumAllValor = (valor) => ({
   valor,
 });
 
+export const subAllValor = (valor) => ({
+  type: SUB_VALOR,
+  valor,
+});
+
 export const addExpensis = (obj) => ({
-  type: ADD_EXPENSIS,
+  type: ADD_EXPENSES,
+  obj,
+});
+
+export const deleteExpense = (obj) => ({
+  type: DELETE_EXPENSE,
   obj,
 });
 
