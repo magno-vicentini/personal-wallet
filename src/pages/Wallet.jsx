@@ -27,7 +27,7 @@ class Wallet extends React.Component {
   async componentDidMount() {
     const { fetchCurr } = this.props;
     await fetchCurr();
-    console.log(fetchCurr);
+    // console.log(fetchCurr);
   }
 
   handleChange({ target }) {
@@ -42,7 +42,7 @@ class Wallet extends React.Component {
     const currentCurrency = Object.values(allCoins)
       .filter((element) => element.code === currency)[0].ask;
 
-    console.log(currentCurrency);
+    // console.log(currentCurrency);
     addValor(Number(value) * currentCurrency);
     addExpense({
       ...this.state,
@@ -58,8 +58,8 @@ class Wallet extends React.Component {
 
   render() {
     const { value, description } = this.state;
-    const { allCoins } = this.props;
-    console.log('alou', allCoins);
+    // const { allCoins } = this.props;
+    // console.log('alou', allCoins);
     return (
       <>
         <Header />

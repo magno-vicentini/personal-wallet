@@ -23,9 +23,13 @@ const mapStateToProps = (state) => ({
   totalField: state.wallet.totalField,
 });
 
+Header.defaultProps = {
+  totalField: undefined,
+};
+
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  totalField: PropTypes.number.isRequired,
+  totalField: PropTypes.number,
 };
 
 export default connect(mapStateToProps)(Header);

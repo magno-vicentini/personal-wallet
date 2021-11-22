@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import TableThead from './TableThead';
 
 class Table extends Component {
   render() {
@@ -8,46 +9,45 @@ class Table extends Component {
     console.log(allExpenses);
     return (
       <table className="column-table">
-        <thead className="container-thead">
-          <tr className="column-thead"><th>Descrição</th></tr>
-          <tr className="column-thead"><th>Tag</th></tr>
-          <tr className="column-thead"><th>Método de pagamento</th></tr>
-          <tr className="column-thead"><th>Valor</th></tr>
-          <tr className="column-thead">
-            <th className="currency-column">Moeda</th>
-            <th>Câmbio utilizado</th>
-          </tr>
-          <tr className="column-thead"><th>Valor convertido</th></tr>
-          <tr className="column-thead"><th>Moeda de conversão</th></tr>
-          <tr className="column-thead"><th>Editar/Excluir</th></tr>
-        </thead>
-        <tbody className="container-thead">
-          <tr className="column-tbody">
-            { allExpenses.map((desc) => <th key={ desc.id }>{desc.description}</th>)}
-          </tr>
-          <tr className="column-tbody">
-            { allExpenses.map((tag) => <th key={ tag.id }>{tag.tag}</th>)}
-          </tr>
-          <tr className="column-tbody">
-            { allExpenses.map((method) => <th key={ method.id }>{method.method}</th>)}
-          </tr>
-          <tr className="column-tbody">
-            { allExpenses.map((value) => <th key={ value.id }>{value.value}</th>)}
-          </tr>
-          <tr className="column-tbody">
-            { allExpenses.map((value) => <th key={ value.id }>{value.value}</th>)}
-          </tr>
-          <tr className="column-tbody">
-            { allExpenses.map((value) => <th key={ value.id }>{value.value}</th>)}
-          </tr>
-          <tr className="column-tbody">
-            { allExpenses.map((curr) => <th key={ curr.id }>Real</th>)}
-          </tr>
-          <tr className="column-tbody">
-            { allExpenses
-              .map((curr) => <button key={ curr.id } type="button">Delete</button>)}
-          </tr>
-        </tbody>
+        <TableThead />
+        { allExpenses.map((expense) => {
+          const currUsed = Object.values(expense.exchangeRates)
+            .filter((currencyUsed) => currencyUsed.codein !== 'BRLT'
+              && currencyUsed.code === expense.currency)[0];
+
+          return (
+            <tbody key={ expense.id } className="row-expense">
+              <tr className="cell-tbody"><td>{expense.description}</td></tr>
+              <tr className="cell-tbody"><td>{expense.tag}</td></tr>
+              <tr className="cell-tbody"><td>{expense.method}</td></tr>
+              <tr className="cell-tbody"><td>{expense.value}</td></tr>
+              <tr className="cell-tbody">
+                <td className="currency-type">
+                  {currUsed.name.split('/')[0]}
+                </td>
+                <td className="currency-exchange">
+                  {Number(currUsed.ask).toFixed(2)}
+                </td>
+              </tr>
+              <tr className="cell-tbody">
+                <td>
+                  {(expense.value * Number(currUsed.ask)).toFixed(2)}
+                </td>
+              </tr>
+              <tr className="cell-tbody"><td>Real</td></tr>
+              <tr className="cell-tbody">
+                <td>
+                  <button
+                    type="button"
+                    data-testid="delete-btn"
+                  >
+                    Excluir
+                  </button>
+                </td>
+              </tr>
+            </tbody>);
+        })}
+
       </table>
     );
   }

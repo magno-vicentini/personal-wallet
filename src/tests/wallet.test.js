@@ -119,7 +119,7 @@ describe('4 - Desenvolva um formulário para adicionar uma despesa contendo as s
     expect(healthOption).toBeInTheDocument();
   });
 
-  test.only('Um botão com o texto \'Adicionar despesa\' que salva as informações da despesa no estado global e atualiza a soma de despesas no header', async () => {
+  test('Um botão com o texto \'Adicionar despesa\' que salva as informações da despesa no estado global e atualiza a soma de despesas no header', async () => {
     const { store } = renderWithRouterAndStore(<Wallet />, '/carteira');
     const addButton = await screen.findByText(/Adicionar despesa/i);
     const valueInput = await screen.findByTestId(VALUE_INPUT_TEST_ID);
@@ -234,7 +234,7 @@ describe('6 - Desenvolva uma tabela com os gastos contendo as seguintes caracter
   });
 });
 
-describe('7 - Implemente a lógica para que a tabela seja alimentada pelo estado da aplicação', () => {
+describe.only('7 - Implemente a lógica para que a tabela seja alimentada pelo estado da aplicação', () => {
   const initial = initialStateWithExpenses;
   test('A tabela deve ser alimentada pelo estado da aplicação, que estará disponível na chave expenses que vem do reducer wallet.', () => {
     renderWithRouterAndStore(<Wallet />, '/carteira', initial);
