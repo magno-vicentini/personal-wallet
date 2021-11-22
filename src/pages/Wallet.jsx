@@ -58,8 +58,8 @@ class Wallet extends React.Component {
 
   render() {
     const { value, description } = this.state;
-    // const { allCoins } = this.props;
-    // console.log('alou', allCoins);
+    const { allCoins } = this.props;
+    console.log('alou', allCoins);
     return (
       <>
         <Header />

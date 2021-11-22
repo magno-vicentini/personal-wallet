@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TableThead from './TableThead';
-import { deleteExpense, subAllValor } from '../actions';
+import { deleteExpense, subAllValor, fetchCurrency } from '../actions';
 
 class Table extends Component {
   constructor() {
@@ -10,13 +10,14 @@ class Table extends Component {
     this.deleteCurrentExpense = this.deleteCurrentExpense.bind(this);
   }
 
-  deleteCurrentExpense(expense) {
-    const { deleteItem, allCoins, subValor } = this.props;
+  async deleteCurrentExpense(expense) {
+    const { deleteItem, allCoins, subValor, fetchCurr } = this.props;
     deleteItem(expense);
-    console.log(expense);
+    console.log('aqui coins ', allCoins);
+    await fetchCurr();
     const currentCurrency = Object.values(allCoins)
-      .filter((element) => element.code === expense.currency)[0].ask;
-    // console.log(currentCurrency);
+      .find((element) => element.code === expense.currency).ask;
+    console.log('oque recebi ', currentCurrency);
     subValor(Number(expense.value) * currentCurrency);
   }
 
@@ -74,9 +75,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   deleteItem: (obj) => dispatch(deleteExpense(obj)),
   subValor: (valor) => dispatch(subAllValor(valor)),
+  fetchCurr: () => dispatch(fetchCurrency()),
 });
 
 Table.propTypes = {
+  fetchCurr: PropTypes.func.isRequired,
   allExpenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   deleteItem: PropTypes.func.isRequired,
   subValor: PropTypes.func.isRequired,
