@@ -24,38 +24,34 @@ class Table extends Component {
       <table className="column-table">
         <TableThead />
         <tbody>
-          { allExpenses.map((expense) => {
-            const currUsed = Object.values(expense.exchangeRates)
-              .filter((currencyUsed) => currencyUsed.codein !== 'BRLT'
-                && currencyUsed.code === expense.currency)[0];
-
-            return (
-              <tr key={ expense.id } className="row-expense">
-                <td className="cell-tbody">{expense.description}</td>
-                <td className="cell-tbody">{expense.tag}</td>
-                <td className="cell-tbody">{expense.method}</td>
-                <td className="cell-tbody">{expense.value}</td>
-                <td className="cell-tbody">
-                  {currUsed.name.split('/')[0]}
-                </td>
-                <td className="cell-tbody">
-                  {Number(currUsed.ask).toFixed(2)}
-                </td>
-                <td className="cell-tbody">
-                  {(expense.value * Number(currUsed.ask)).toFixed(2)}
-                </td>
-                <td className="cell-tbody">Real</td>
-                <td className="cell-tbody">
-                  <button
-                    type="button"
-                    data-testid="delete-btn"
-                    onClick={ () => this.deleteCurrentExpense(expense) }
-                  >
-                    Excluir
-                  </button>
-                </td>
-              </tr>);
-          })}
+          { allExpenses.map((expense) => (
+            <tr key={ expense.id } className="row-expense">
+              <td className="cell-tbody">{expense.description}</td>
+              <td className="cell-tbody">{expense.tag}</td>
+              <td className="cell-tbody">{expense.method}</td>
+              <td className="cell-tbody">{expense.value}</td>
+              <td className="cell-tbody">
+                {expense.exchangeRates[expense.currency].name.split('/')[0]}
+              </td>
+              <td className="cell-tbody">
+                {Number(expense.exchangeRates[expense.currency].ask).toFixed(2)}
+              </td>
+              <td className="cell-tbody">
+                {(expense.value * Number(expense.exchangeRates[expense.currency].ask))
+                  .toFixed(2)}
+              </td>
+              <td className="cell-tbody">Real</td>
+              <td className="cell-tbody">
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  onClick={ () => this.deleteCurrentExpense(expense) }
+                >
+                  Excluir
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
 
       </table>

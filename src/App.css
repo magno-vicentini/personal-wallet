@@ -46,22 +46,6 @@
   flex-direction: column;
 }
 
-.currency-type {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  width: 43%;
-}
-
-.currency-exchange {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  width: 55%;
-}
-
 .column-thead {
   display: flex;
   justify-content: center;
