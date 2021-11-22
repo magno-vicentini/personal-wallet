@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchCurrency, sumAllValor, addExpensis } from '../actions';
+import { fetchCurrency, addExpensis } from '../actions';
 import Header from '../components/Header';
 import Currency from '../components/Currency';
 import Payment from '../components/Payment';
@@ -13,8 +13,8 @@ class Wallet extends React.Component {
     super(props);
     this.state = {
       id: 0,
-      value: '',
-      currency: '',
+      value: '0',
+      currency: 'USD',
       description: '',
       method: '',
       tag: '',
@@ -36,14 +36,9 @@ class Wallet extends React.Component {
   }
 
   async submitExpensis() {
-    const { fetchCurr, addValor, allCoins, addExpense } = this.props;
-    const { value, currency, id } = this.state;
+    const { fetchCurr, allCoins, addExpense } = this.props;
+    const { id } = this.state;
     await fetchCurr();
-    const currentCurrency = Object.values(allCoins)
-      .filter((element) => element.code === currency)[0].ask;
-
-    // console.log(currentCurrency);
-    addValor(Number(value) * currentCurrency);
     addExpense({
       ...this.state,
       exchangeRates: allCoins,
@@ -97,22 +92,24 @@ class Wallet extends React.Component {
 
 const mapStateToProps = (state) => ({
   email: state,
-  allCoins: state.wallet.currencies,
+  allCoins: state.wallet.allCurrencies,
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchCurr: () => dispatch(fetchCurrency()),
-  addValor: (valor) => dispatch(sumAllValor(valor)),
   addExpense: (obj) => dispatch(addExpensis(obj)),
 });
 
+Wallet.defaultProps = {
+  allCoins: undefined,
+};
+
 Wallet.propTypes = {
   fetchCurr: PropTypes.func.isRequired,
-  addValor: PropTypes.func.isRequired,
   addExpense: PropTypes.func.isRequired,
   allCoins: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
-    PropTypes.object]).isRequired,
+    PropTypes.object]),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

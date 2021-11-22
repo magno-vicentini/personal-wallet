@@ -15,13 +15,13 @@ class Currency extends Component {
           data-testid="currency-input"
           onChange={ changeInput }
         >
-          { Object.keys(allCoins)
-            .filter((el) => el !== 'USDT')
-            .map((curr) => (
+          {
+            allCoins.map((curr) => (
               <option key={ curr } data-testid={ curr }>
                 {curr}
               </option>
-            ))}
+            ))
+          }
         </select>
       </label>
     );

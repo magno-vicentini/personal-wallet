@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/carteira" component={ Wallet } />
+        <Route path="/carteira"><Wallet /></Route>
       </Switch>
     );
   }
