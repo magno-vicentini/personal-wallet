@@ -15,14 +15,14 @@ export const loginUser = (email) => ({
   email,
 });
 
-export const addExpensis = (obj) => ({
+export const addExpensis = (objAdd) => ({
   type: ADD_EXPENSES,
-  obj,
+  objAdd,
 });
 
-export const deleteExpense = (obj) => ({
+export const deleteExpense = (objDel) => ({
   type: DELETE_EXPENSE,
-  obj,
+  objDel,
 });
 
 export const editExpense = (objEdit) => ({

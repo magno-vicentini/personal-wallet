@@ -57,7 +57,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  deleteItem: (obj) => dispatch(deleteExpense(obj)),
+  deleteItem: (objDel) => dispatch(deleteExpense(objDel)),
 });
 
 Table.propTypes = {

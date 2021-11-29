@@ -42,9 +42,9 @@ class Wallet extends React.Component {
   async submitExpensis() {
     const { fetchCurr, allCoins, addExpense, editExp } = this.props;
     const {
-      id, value, description, currency, method, tag, isEditing, prevId,
+      id, value, description, exchangeRates,
+      currency, method, tag, isEditing, prevId,
     } = this.state;
-    await fetchCurr();
     if (isEditing) {
       editExp({
         id,
@@ -53,7 +53,7 @@ class Wallet extends React.Component {
         currency,
         method,
         tag,
-        exchangeRates: allCoins,
+        exchangeRates,
       });
       return this.setState({
         id: prevId,
@@ -62,6 +62,7 @@ class Wallet extends React.Component {
         isEditing: false,
       });
     }
+    await fetchCurr();
 
     addExpense({
       id,
@@ -81,9 +82,8 @@ class Wallet extends React.Component {
   }
 
   expenseEditing(expense) {
-    const { currency, description, value, method, tag } = expense;
+    const { currency, description, value, method, tag, exchangeRates } = expense;
     const { id } = this.state;
-    console.log(expense);
     this.setState({
       isEditing: true,
       id: expense.id,
@@ -92,6 +92,7 @@ class Wallet extends React.Component {
       currency,
       method,
       tag,
+      exchangeRates,
       prevId: id,
     });
   }
@@ -140,7 +141,7 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchCurr: () => dispatch(fetchCurrency()),
-  addExpense: (obj) => dispatch(addExpensis(obj)),
+  addExpense: (objAdd) => dispatch(addExpensis(objAdd)),
   editExp: (objEdit) => dispatch(editExpense(objEdit)),
 });
 

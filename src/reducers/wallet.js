@@ -24,12 +24,12 @@ function wallet(state = INITIAL_STATE, action) {
   case ADD_EXPENSES:
     return {
       ...state,
-      expenses: [...state.expenses, action.obj],
+      expenses: [...state.expenses, action.objAdd],
     };
   case DELETE_EXPENSE:
     return {
       ...state,
-      expenses: state.expenses.filter((element) => element.id !== action.obj.id),
+      expenses: state.expenses.filter((element) => element.id !== action.objDel.id),
     };
   case EDIT_EXPENSE:
     return {

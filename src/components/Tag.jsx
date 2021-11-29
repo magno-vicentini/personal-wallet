@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Tag extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       expenditure: ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'],
     };

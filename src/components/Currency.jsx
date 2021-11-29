@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 class Currency extends Component {
   render() {
     const { allCoins, changeInput } = this.props;
-    // console.log(Object.keys(allCoins));
     return (
       <label htmlFor="currency">
         Moeda:
