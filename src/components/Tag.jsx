@@ -21,7 +21,7 @@ export default class Tag extends Component {
           data-testid="tag-input"
           onChange={ changeInput }
         >
-          { expenditure.map((el) => <option key={ el }>{el}</option>)}
+          { expenditure.map((el) => <option key={ el } value={ el }>{el}</option>)}
         </select>
       </label>
     );

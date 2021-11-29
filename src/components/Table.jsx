@@ -2,24 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TableThead from './TableThead';
-import { deleteExpense, fetchCurrency } from '../actions';
+import { deleteExpense } from '../actions';
 
 class Table extends Component {
-  constructor() {
-    super();
-    this.deleteCurrentExpense = this.deleteCurrentExpense.bind(this);
-  }
-
-  async deleteCurrentExpense(expense) {
-    const { deleteItem, allCoins, fetchCurr } = this.props;
-    deleteItem(expense);
-    console.log('aqui coins ', allCoins);
-    await fetchCurr();
-  }
-
   render() {
-    const { allExpenses } = this.props;
-    console.log(allExpenses);
+    const { allExpenses, deleteItem, expenseEditing } = this.props;
     return (
       <table className="column-table">
         <TableThead />
@@ -44,8 +31,15 @@ class Table extends Component {
               <td className="cell-tbody">
                 <button
                   type="button"
+                  data-testid="edit-btn"
+                  onClick={ () => expenseEditing(expense) }
+                >
+                  Editar
+                </button>
+                <button
+                  type="button"
                   data-testid="delete-btn"
-                  onClick={ () => this.deleteCurrentExpense(expense) }
+                  onClick={ () => deleteItem(expense) }
                 >
                   Excluir
                 </button>
@@ -53,7 +47,6 @@ class Table extends Component {
             </tr>
           ))}
         </tbody>
-
       </table>
     );
   }
@@ -61,26 +54,16 @@ class Table extends Component {
 
 const mapStateToProps = (state) => ({
   allExpenses: state.wallet.expenses,
-  allCoins: state.wallet.allCurrencies,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   deleteItem: (obj) => dispatch(deleteExpense(obj)),
-  fetchCurr: () => dispatch(fetchCurrency()),
 });
 
-Table.defaultProps = {
-  allCoins: undefined,
-};
-
 Table.propTypes = {
-  fetchCurr: PropTypes.func.isRequired,
   allExpenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   deleteItem: PropTypes.func.isRequired,
-  allCoins: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array,
-    PropTypes.object]),
+  expenseEditing: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

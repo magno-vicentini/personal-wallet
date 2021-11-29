@@ -2,12 +2,12 @@ import {
   REQUEST_API,
   ADD_EXPENSES,
   DELETE_EXPENSE,
+  EDIT_EXPENSE,
 } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
-  totalField: 0,
   allCurrencies: [],
 };
 
@@ -29,7 +29,14 @@ function wallet(state = INITIAL_STATE, action) {
   case DELETE_EXPENSE:
     return {
       ...state,
-      expenses: [...state.expenses].filter((element) => element !== action.obj),
+      expenses: state.expenses.filter((element) => element.id !== action.obj.id),
+    };
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      expenses: [...state.expenses
+        .filter((element) => element.id !== action.objEdit.id), action.objEdit]
+        .sort((a, b) => a.id - b.id),
     };
   default:
     return state;

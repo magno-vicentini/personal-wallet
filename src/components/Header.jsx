@@ -13,13 +13,11 @@ class Header extends Component {
     const sum = allExpenses
       .reduce((acc, curr) => acc
         + (Number(curr.value) * curr.exchangeRates[curr.currency].ask), 0);
-
     return sum;
   }
 
   render() {
-    const { email, totalField = 0 } = this.props;
-    console.log(totalField);
+    const { email } = this.props;
     return (
       <header className="header-container">
         <div className="field-container">
@@ -38,13 +36,8 @@ const mapStateToProps = (state) => ({
   allExpenses: state.wallet.expenses,
 });
 
-Header.defaultProps = {
-  totalField: undefined,
-};
-
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  totalField: PropTypes.number,
   allExpenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

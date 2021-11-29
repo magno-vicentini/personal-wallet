@@ -17,7 +17,7 @@ class Currency extends Component {
         >
           {
             allCoins.map((curr) => (
-              <option key={ curr } data-testid={ curr }>
+              <option key={ curr } data-testid={ curr } value={ curr }>
                 {curr}
               </option>
             ))
