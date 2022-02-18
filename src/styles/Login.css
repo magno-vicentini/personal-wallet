@@ -22,11 +22,9 @@
 
 .button-disable {
   background-color: red;
-  opacity: 15%;
 }
 
 .button-enable {
   background-color: green;
-  opacity: 1;
   cursor: pointer;
 }
