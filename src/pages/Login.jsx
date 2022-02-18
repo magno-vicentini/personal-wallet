@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { loginUser } from '../actions';
+import '../styles/Login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -33,30 +34,43 @@ class Login extends React.Component {
     const { loginEmail } = this.props;
     return (
       <div className="login-container">
-        <input
-          type="email"
-          name="email"
-          data-testid="email-input"
-          value={ email }
-          onChange={ this.handleChange }
-          placeholder="example@example.com"
-        />
-        <input
-          type="password"
-          name="password"
-          data-testid="password-input"
-          value={ password }
-          onChange={ this.handleChange }
-        />
-        <Link to="/carteira">
-          <button
-            type="submit"
-            disabled={ this.validation() }
-            onClick={ () => loginEmail(email) }
-          >
-            Entrar
-          </button>
-        </Link>
+        <h1>Personal Wallet</h1>
+        <p>Sing Up</p>
+
+        <div className="card-input">
+          <p>Email: </p>
+          <input
+            type="email"
+            name="email"
+            data-testid="email-input"
+            value={ email }
+            onChange={ this.handleChange }
+            placeholder="example@example.com"
+          />
+
+        </div>
+
+        <div className="card-input">
+          <p>Password:</p>
+          <input
+            type="password"
+            name="password"
+            data-testid="password-input"
+            value={ password }
+            onChange={ this.handleChange }
+          />
+          <Link to="/carteira">
+            <button
+              type="submit"
+              className={ (this.validation()) ? 'button-disable' : 'button-enable' }
+              disabled={ this.validation() }
+              onClick={ () => loginEmail(email) }
+            >
+              Entrar
+            </button>
+          </Link>
+
+        </div>
       </div>
     );
   }

@@ -6,7 +6,7 @@ class InputDesc extends Component {
     const { changeInput, desc } = this.props;
     return (
       <label htmlFor="description">
-        Descrição
+        Descrição:
         <input
           type="text"
           name="description"

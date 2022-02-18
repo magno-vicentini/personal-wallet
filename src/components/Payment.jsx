@@ -6,7 +6,7 @@ class Payment extends Component {
     const { changeInput } = this.props;
     return (
       <label htmlFor="method">
-        Método de pagamento
+        Método de pagamento:
         <select
           name="method"
           id="method"

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import '../styles/Wallet.css';
 
 export default class TableThead extends Component {
   render() {
     return (
       <thead>
-        <tr className="row-expense">
+        <tr className="thead-expenses">
           <th className="column-thead">Descrição</th>
           <th className="column-thead">Tag</th>
           <th className="column-thead">Método de pagamento</th>

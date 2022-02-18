@@ -6,7 +6,7 @@ class InputValue extends Component {
     const { changeInput, value } = this.props;
     return (
       <label htmlFor="value">
-        Valor
+        Valor:
         <input
           type="text"
           name="value"

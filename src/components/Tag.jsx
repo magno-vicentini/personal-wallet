@@ -14,7 +14,7 @@ export default class Tag extends Component {
     const { changeInput } = this.props;
     return (
       <label htmlFor="tag">
-        Tag
+        Tag:
         <select
           name="tag"
           id="tag"

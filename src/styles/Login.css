@@ -1,0 +1,32 @@
+.login-container {
+  align-items: center;
+  border: 10px solid rgba(51, 31, 6, 0.479);
+  box-shadow: 15px 30px 10px black;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+  max-height: 600px;
+  justify-content: center;
+  margin: auto;
+  margin-top: 30px;
+  width: 30%;
+  color: white;
+  text-align: center;
+}
+
+.card-input {
+  display: flex;
+  align-items: center;
+}
+
+.button-disable {
+  background-color: red;
+  opacity: 15%;
+}
+
+.button-enable {
+  background-color: green;
+  opacity: 1;
+  cursor: pointer;
+}

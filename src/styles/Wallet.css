@@ -1,0 +1,104 @@
+.wallet-page {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-container {
+  background-color: rgba(34, 33, 33, 0.13);
+  border: 2px solid rgba(51, 31, 6, 0.479);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.field-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.user {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.container-thead {
+  border: 2px solid rgb(230, 201, 39);
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  padding: 10px 0;
+}
+
+.column-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.column-thead {
+  display: flex;
+  justify-content: center;
+  width: 12%;
+}
+
+.form-expenses {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.form-expenses input, select, button {
+  background-color: transparent;
+  border: 1px solid white ;
+  border-radius: 10px;
+  color: white;
+  margin: 10px;
+}
+
+option {
+  background-color: rgba(73, 8, 8, 0.781);
+}
+
+.container-tbody {
+  display: flex;
+  justify-content: space-around;
+}
+.thead-expenses {
+  align-items: center;
+  border: 1px solid rgb(161, 89, 0);
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  padding: 15px 10px;
+  width: 100%;
+}
+
+.row-expense {
+  align-items: center;
+  border: 1px solid rgb(161, 89, 0);
+  box-shadow: 0 10px 5px rgba(73, 38, 6, 0.774);
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  padding: 15px 10px;
+  width: 100%;
+}
+
+
+.cell-tbody {
+  display: flex;
+  justify-content: center;
+  width: 12%;
+}
+
+.button-send:hover {
+  cursor: pointer;
+  background-color: green;
+}

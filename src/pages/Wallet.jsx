@@ -9,6 +9,7 @@ import Tag from '../components/Tag';
 import Table from '../components/Table';
 import InputValue from '../components/InputValue';
 import InputDesc from '../components/InputDesc';
+import '../styles/Wallet.css';
 
 class Wallet extends React.Component {
   constructor(props) {
@@ -100,7 +101,7 @@ class Wallet extends React.Component {
   render() {
     const { value, description, isEditing } = this.state;
     return (
-      <>
+      <div className="wallet-page">
         <Header />
         <form action="" className="form-expenses">
           <InputValue changeInput={ this.handleChange } value={ value } />
@@ -113,6 +114,7 @@ class Wallet extends React.Component {
               ? (
                 <button
                   type="button"
+                  className="button-send"
                   onClick={ this.submitExpensis }
                 >
                   Adicionar despesa
@@ -121,6 +123,7 @@ class Wallet extends React.Component {
               : (
                 <button
                   type="button"
+                  className="button-send"
                   onClick={ this.submitExpensis }
                 >
                   Editar despesa
@@ -130,7 +133,7 @@ class Wallet extends React.Component {
 
         </form>
         <Table expenseEditing={ this.expenseEditing } />
-      </>
+      </div>
     );
   }
 }
