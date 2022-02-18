@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={ Login } />
+        <Route exact path="/personal-wallet" component={ Login } />
         <Route path="/carteira"><Wallet /></Route>
       </Switch>
     );
