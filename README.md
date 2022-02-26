@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Magno Vicentini Serra</h1>
-<h1 align="center">Welcome to Star Wars Planet Search 🪐🪐🪐</h1>
+<h1 align="center">Welcome to Trybe Wallet</h1>
 
 ### ✨ [Demo](https://magno-vicentini.github.io/personal-wallet/)
 
